@@ -4,3 +4,10 @@
 /bin/
 *.o
 *~
+
+README.html
+readme.txt
+100mb.bin
+ls-lR.gz
+
+.DS_Store
