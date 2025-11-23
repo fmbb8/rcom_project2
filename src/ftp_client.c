@@ -1,6 +1,6 @@
 #include "includes/ftp_url.h"
+#include "includes/ftp_resolver.h"
 #include <stdio.h>
-
 
 int main(int argc, char **argv) {
   if (argc != 2) {
@@ -16,7 +16,13 @@ int main(int argc, char **argv) {
 
   printf("Parsed Hostname: %s\n", url.host);
   printf("Parsed Path: %s\n", url.path);
+  printf("Parsed User: %s\n", url.user);
+  printf("Parsed Password: %s\n", url.password);
 
+  char ip[64];
+  if (resolve_hostname(url.host, ip, sizeof(ip)) == 0) {
+    printf("Resolved IP: %s\n", ip);
+  }
   free_ftp_url(&url);
   return 0;
 }
