@@ -1,0 +1,22 @@
+# Reset configuration
+/system reset-configuration
+
+/interface bridge add name=bridge60
+
+/interface bridge port remove [find interface =etherX] # X é a porta do E1 do TUX3
+/interface bridge port add bridge=bridge60 interface=etherX # X é a porta do E1 do TUX3
+
+/interface bridge port remove [find interface =etherX] # X é a porta do E1 do TUX4
+/interface bridge port add bridge=bridge60 interface=etherX # X é a porta do E1 do TUX4
+
+/interface bridge add name=bridge61
+
+/interface bridge port remove [find interface =etherX] # X é a porta do E2 do TUX4
+/interface bridge port add bridge=bridge61 interface=etherX # X é a porta do E2 do TUX4
+
+/interface bridge port remove [find interface =etherX] # X é a porta do E1 do TUX2
+/interface bridge port add bridge=bridge61 interface=etherX # X é a porta do E1 do TUX2
+
+# Debug
+/interface bridge print
+/interface bridge port print
