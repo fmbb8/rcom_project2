@@ -59,7 +59,13 @@ int ftp_read_reply(int sockfd, char **out_reply) {
   if (!line)
     return -1;
 
+  if (strlen(line) < 3) {
+    free(line);
+    return -1;
+  }
+
   int code = atoi(line);
+  char separator = line[3];
 
   size_t cap = 4096;
   char *buffer = malloc(cap);
@@ -72,10 +78,7 @@ int ftp_read_reply(int sockfd, char **out_reply) {
   strncat(buffer, line, cap - strlen(buffer) - 1);
   strcat(buffer, "\n");
 
-  int multiline = 0;
-  if (strlen(line) >= 4 && line[3] == '-') {
-    multiline = 1;
-  }
+  int multiline = (separator == '-');
 
   free(line);
 
@@ -89,8 +92,7 @@ int ftp_read_reply(int sockfd, char **out_reply) {
     if (!line)
       break;
 
-    size_t need =
-        strlen(buffer) + strlen(line) + 2;
+    size_t need = strlen(buffer) + strlen(line) + 2;
     if (need > cap) {
       cap *= 2;
       buffer = realloc(buffer, cap);
@@ -99,10 +101,10 @@ int ftp_read_reply(int sockfd, char **out_reply) {
     strcat(buffer, line);
     strcat(buffer, "\n");
 
-    char code_check[5];
-    snprintf(code_check, 5, "%d ", code);
-
-    if (strncmp(line, code_check, 4) == 0) {
+    char code_str[4];
+    snprintf(code_str, sizeof(code_str), "%d", code);
+    
+    if (strlen(line) >= 4 && strncmp(line, code_str, 3) == 0 && line[3] == ' ') {
       free(line);
       break;
     }
@@ -164,6 +166,19 @@ int ftp_parse_pasv(const char *reply, char *ip_out, size_t ip_len,
   *port_out = p1 * 256 + p2;
 
   return 0;
+}
+
+long long ftp_parse_file_size(const char *reply) {
+  const char *p = strchr(reply, '(');
+  if (!p)
+    return -1;
+  
+  long long size;
+  if (sscanf(p, "(%lld bytes)", &size) == 1) {
+    return size;
+  }
+  
+  return -1;
 }
 
 int ftp_quit(int sockfd) {

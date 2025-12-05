@@ -1,5 +1,3 @@
-# --- Configuration ---
-# Change this URL to whatever you want to test
 URL := ftp://anonymous:anonymous@ftp.bit.nl/speedtest/100mb.bin
 
 CC := gcc

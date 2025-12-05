@@ -14,6 +14,8 @@ int ftp_read_reply(int sockfd, char **out_reply);
 
 int ftp_parse_pasv(const char *reply, char *ip_out, size_t ip_len, int *port_out);
 
+long long ftp_parse_file_size(const char *reply);
+
 int ftp_quit(int sockfd);
 
 #endif
