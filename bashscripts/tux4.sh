@@ -10,7 +10,7 @@ sudo sysctl -w net.ipv4.ip_forward=1
 sudo sysctl -w net.ipv4.icmp_echo_ignore_broadcasts=0
 
 # Default Gateway
-sudo route add 172.16.1.0/24 gw 172.16.61.254
+sudo route add -net 172.16.1.0/24 gw 172.16.61.254
 
 # DNS Configuration
 echo "nameserver 10.227.20.3" | sudo tee /etc/resolv.conf
