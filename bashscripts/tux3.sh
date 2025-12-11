@@ -2,14 +2,14 @@
 echo "Configuring Tux3 (Subnet 60)..."
 
 # IP Configuration
-sudo ifconfig if_e1 172.16.60.1/24
+sudo ifconfig if_e1 172.16.Y0.1/24
 
 # Clean ARP
 sudo ip neigh flush all
 
 # Default Gateway
-sudo route add -net 172.16.61.0/24 gw 172.16.60.254
-sudo route add -net 172.16.1.0/24 gw 172.16.60.254
+sudo route add -net 172.16.Y1.0/24 gw 172.16.Y0.254
+sudo route add -net 172.16.1.0/24 gw 172.16.Y0.254
 
 # DNS Configuration
 echo "nameserver 10.227.20.3" | sudo tee /etc/resolv.conf

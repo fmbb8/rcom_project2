@@ -1,7 +1,7 @@
 /system reset-configuration
 
-/interface bridge add name=bridge60
-/interface bridge add name=bridge61
+/interface bridge add name=bridgeY0
+/interface bridge add name=bridgeY1
 
 /interface bridge port remove [find interface=etherTUX3_E1]
 /interface bridge port add bridge=bridge60 interface=etherTUX3_E1
