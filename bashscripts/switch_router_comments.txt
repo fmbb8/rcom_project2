@@ -4,10 +4,10 @@
 
 2. Create Bridges
 
-3. Assign Ports to Bridge 60 (Tux3-e1 & Tux4-e1)
+3. Assign Ports to Bridge Y0 (Tux3-e1 & Tux4-e1)
 Remove from default bridge first, then add to bridge60
 
-4. Assign Ports to Bridge 61 (Tux4-e2, Tux2-e1 & RC)
+4. Assign Ports to Bridge Y1 (Tux4-e2, Tux2-e1 & RC)
 Remove from default bridge first, then add to bridge61
 
 5. Verify
@@ -18,6 +18,6 @@ Remove from default bridge first, then add to bridge61
 
 2. Configure Internal IP on Ether1 and 2
 
-3. Add Static Route to Subnet 60 (The "Hidden" Network)
+3. Add Static Route to Subnet Y0 (The "Hidden" Network)
 
 4. Verify Routes
