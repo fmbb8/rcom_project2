@@ -15,3 +15,24 @@ sudo route add -net 172.16.1.0/24 gw 172.16.Y0.254
 echo "nameserver 10.227.20.3" | sudo tee /etc/resolv.conf
 
 echo "Tux3 Ready."
+
+
+
+#new ips ------------------------------------------------------
+#!/bin/bash
+echo "Configuring Tux3 (Subnet 112)..."
+
+# IP Configuration
+sudo ifconfig if_e1 172.16.112.1/24
+
+# Clean ARP
+sudo ip neigh flush all
+
+# Default Gateway
+sudo route add -net 172.16.2.0/24 gw 172.16.112.10
+sudo route add -net 172.16.1.0/24 gw 172.16.112.10
+
+# DNS Configuration
+echo "nameserver 10.227.20.3" | sudo tee /etc/resolv.conf
+
+echo "Tux3 Ready."

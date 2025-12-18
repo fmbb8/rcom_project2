@@ -19,3 +19,32 @@
 /interface bridge port add bridge=bridge61 interface=etherRC_ETHER2
 
 /interface bridge port print brief
+
+
+
+
+
+
+#new ips-------------------------------------------------------------
+
+/system reset-configuration
+
+/interface bridge add name=bridge112
+/interface bridge add name=bridge212
+
+/interface bridge port remove [find interface=ether3]
+/interface bridge port add bridge=bridge112 interface=ether3
+
+/interface bridge port remove [find interface=ether4]
+/interface bridge port add bridge=bridge112 interface=ether4
+
+/interface bridge port remove [find interface=ether2]
+/interface bridge port add bridge=bridge212 interface=ether2
+
+/interface bridge port remove [find interface=ether5]
+/interface bridge port add bridge=bridge212 interface=ether5
+
+/interface bridge port remove [find interface=ether10]
+/interface bridge port add bridge=bridge212 interface=ether10
+
+/interface bridge port print brief
